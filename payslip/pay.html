@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payroll</title>
+  <style>
+    .container1 {
+      display: flex;
+      background-color: white;
+      align-items: flex-start;
+      height: 700px;
+    }
+
+    .image {
+      align-self: stretch;
+      background-color: grey;
+      width:15%;
+      padding: 10px;
+    }
+
+    .container {
+      background-color: bisque;
+      width:120%;
+      margin-top:1%;
+      margin-left:10%;
+      padding: 4%;
+      height: 500px;
+    }
+
+    a {
+      font-size: 20px;
+      color: black;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: yellow;
+    }
+
+    .header {
+      text-align: center;
+      margin-left: 100%;
+      display: flex;
+    }
+
+    input {
+      width: 20%;
+      height: 40px;
+      border: 2px solid black;
+      background-color: bisque;
+      margin: 5px;
+    }
+
+    label {
+      font-size: 20px;
+      margin:10px;
+    }
+
+    #submit {
+      border-radius: 5px;
+      margin-top: 10%;
+      margin-left: 40%;
+      background-color: yellow;
+      width: 20%;
+    }
+
+    #cancel {
+      border-radius: 5px;
+      background-color: rgb(6, 6, 57);
+      color: azure;
+      width: 15%;
+      margin-left: 10px;
+    }
+
+    #date {
+      margin-left: 5px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .submit {
+      margin-top: 20px;
+    }
+    h1{
+        color: black;
+        text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container1">
+    <div class="image">
+      <img id="img1" src="image/Overview.png" alt="Overview" />
+      <br /><a href="view.html">Overview</a>
+      <br /><br />
+      <img id="img2" src="image/Payroll.png" alt="Payroll" />
+      <br /><a href="pay.html">Payroll</a>
+      <br /><br />
+      <img id="img3" src="image/Payroll.png" alt="Payslip" />
+      <br /><a href="slip.html">Payslip</a>
+    </div>
+
+    <div class="payroll">
+      <div class="header">
+        <h1>Payroll</h1>
+      </div>
+
+      <div class="container">
+        <form id="payrollForm">
+          <ul>
+            <label for="name">Employee name</label>
+            <input type="text" id="name" required />
+
+            <label for="role">Employee Role</label>
+            <input type="text" id="role" required /><br>
+
+            <label for="id">Employee ID</label>
+            <input type="text" id="id" required />
+
+            <label for="month">Month</label>
+            <input type="month" id="month" />
+
+            <label for="date">Date</label>
+            <input type="date" id="date" /><br>
+
+            <label for="salary">Basic Salary</label>
+            <input type="number" id="salary" />
+            
+
+            <label for="total">Total Salary</label>
+            <input type="number" id="total" readonly /><br>
+
+
+            <label for="working">No of Working Days</label>
+            <input type="number" id="working" />
+
+            <label for="present">Total Present Days</label>
+            <input type="number" id="present" /><br>
+
+            <label for="leave">Total Leave Days</label>
+            <input type="number" id="leave" />
+
+            <label for="add">Additions</label>
+            <input type="number" id="add" />
+
+            <label for="ded">Deductions</label>
+            <input type="number" id="ded" />
+          </ul>
+
+          <div class="submit">
+            <input type="button" id="submit" value="Submit Payroll" />
+            <input type="reset" id="cancel" value="Cancel" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const salaryInput = document.getElementById("salary");
+    const workingInput = document.getElementById("working");
+    const presentInput = document.getElementById("present");
+    const AdditionInput = document.getElementById("add");
+    const DeductionInput = document.getElementById("ded");
+    const totalInput = document.getElementById("total");
+
+    function calculateSalary() {
+      const base = parseFloat(salaryInput.value) || 0;
+      const workDays = parseFloat(workingInput.value) || 0;
+      const present = parseFloat(presentInput.value) || 0;
+      const add = parseFloat(AdditionInput.value) || 0;
+      const deduct = parseFloat(DeductionInput.value) || 0;
+
+      if (workDays > 0) {
+        const perDay = base / workDays;
+        const gross = perDay * present;
+        const total = gross + add - deduct;
+        totalInput.value = total.toFixed(2);
+      } else {
+        totalInput.value = "";
+      }
+      localStorage.setItem("name", document.getElementById("name").value);
+  localStorage.setItem("role", document.getElementById("role").value);
+  localStorage.setItem("empId", document.getElementById("id").value);
+  localStorage.setItem("month", document.getElementById("month").value);
+  localStorage.setItem("date", document.getElementById("date").value);
+  localStorage.setItem("salary", base);
+  localStorage.setItem("working", workDays);
+  localStorage.setItem("present", present);
+  localStorage.setItem("leave", document.getElementById("leave").value);
+  localStorage.setItem("add", add);
+  localStorage.setItem("ded", deduct);
+  localStorage.setItem("total",document.getElementById("total").value);
+
+  
+  
+}
+
+     
+    
+
+    document.getElementById("submit").addEventListener("click", calculateSalary);
+  </script>
+</body>
+</html>

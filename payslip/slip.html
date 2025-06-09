@@ -1,0 +1,113 @@
+
+   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payslip Details</title>
+  <style>
+            .container1 {
+      display: flex;
+      background-color: white;
+      align-items: flex-start;
+      height: 700px;
+    }
+
+    .image {
+      align-self: stretch;
+      background-color: grey;
+      width:15%;
+      padding: 10px;
+    }
+    a{
+                font-size:20px;
+                color: black;
+                
+             }
+             a:hover{
+                color: yellow;
+             }
+    body { font-family: Arial; padding: 40px; }
+    .payslip-box { background-color: #fff7e0; padding: 20px; border-radius: 10px; width: 80%; margin: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #000; padding: 10px; text-align: center; }
+    th { background-color: #ffe600; }
+    .heading { text-align: center; margin-bottom: 30px; }
+    .summary { margin-top: 20px; font-size: 18px; font-weight: bold; text-align: right; }
+  </style>
+</head>
+<body>
+     <div class="container1">
+    <div class="image">
+      <img id="img1" src="image/Overview.png" alt="Overview" />
+      <br /><a href="view.html">Overview</a>
+      <br /><br />
+      <img id="img2" src="image/Payroll.png" alt="Payroll" />
+      <br /><a href="pay.html">Payroll</a>
+      <br /><br />
+      <img id="img3" src="image/Payroll.png" alt="Payslip" />
+      <br /><a href="slip.html">Payslip</a>
+    </div>
+  <div class="payslip-box">
+    <h2 class="heading">Payslip Details</h2>
+    <p><strong>Employee Name:</strong> <span id="name"></span></p>
+    <p><strong>Employee ID:</strong> <span id="empId"></span></p>
+    <p><strong>Role:</strong> <span id="role"></span></p>
+    <p><strong>Date:</strong> <span id="date"></span></p>
+    <p><strong>Month:</strong> <span id="month"></span></p>
+
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">Employee Details</th>
+          <th colspan="2">Earnings</th>
+          <th>Additions</th>
+          <th>Deductions</th>
+        </tr>
+        <tr>
+          <th>Employee ID</th>
+          <th>Employee Name</th>
+          <th>Basic Salary</th>
+          <th>Total Salary</th>
+          <th>Additions</th>
+          <th>Deductions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="t-empId"></td>
+          <td id="t-name"></td>
+          <td id="t-salary"></td>
+          <td id="t-total"></td>
+          <td id="t-add"></td>
+          <td id="t-ded"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="summary">
+      Total Earnings: ₹<span id="earnings"></span>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("name").textContent = localStorage.getItem("name");
+    document.getElementById("empId").textContent = localStorage.getItem("empId");
+    document.getElementById("role").textContent = localStorage.getItem("role");
+    document.getElementById("date").textContent = localStorage.getItem("date");
+    document.getElementById("month").textContent = localStorage.getItem("month");
+       
+
+    document.getElementById("t-salary").textContent = localStorage.getItem("salary");
+
+    document.getElementById("t-empId").textContent = localStorage.getItem("empId");
+  document.getElementById("t-name").textContent = localStorage.getItem("name") ;
+    document.getElementById("t-add").textContent = localStorage.getItem("add");
+    document.getElementById("t-ded").textContent = localStorage.getItem("ded");
+     document.getElementById("t-total").textContent = localStorage.getItem("total");
+
+    document.getElementById("earnings").textContent=localStorage.getItem("total")
+
+  </script>
+</body>
+</html>
