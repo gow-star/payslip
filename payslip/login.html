@@ -103,7 +103,7 @@ p{
     margin-left: 30%;
     cursor: pointer;
 }
-input[type="passward"].toggle-password {
+input[type="password"].toggle-password {
       position: absolute;
       top: 50%;
       right:40px;
@@ -132,19 +132,21 @@ input[type="passward"].toggle-password {
          <h1>Login</h1>
          
          <div class="form">
-         <form>
+         <form onsubmit="login(event)">
             <img id="img1"src="image/mail.png">
             <input type="text" placeholder="Enter Username"id="uname" required style="color:black">
+             <br>
+             <br>
+             <br>
 
-             <br>
-             <br>
-             <br>
              
              <img id="img2" src="image/Password.png">
              <input type="password"placeholder="Password"id="password" required>
+             <span class="toggle-password" onclick="togglePassword()"></span>
+             
         
 
-             <p>Forgot password?</p>
+             <p onclick="alert('Reset link will be sent to your email')">Forgot password?</p>
              <br>
              <br>
              <input type="submit"value="Login"id="Login" placeholder="login"onclick="login()">
@@ -156,11 +158,25 @@ input[type="passward"].toggle-password {
         </div>
     </div>
 <script>
-  function login() {
+  function login(event) {
+     event.preventDefault();
+    let username = document.getElementById("uname").value;
+    localStorage.setItem("username", username);
 
   
     window.location.href = "view.html";
   }
+  function togglePassword() {
+      const passwordField = document.getElementById("password");
+      const toggleBtn = document.querySelector(".toggle-password");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleBtn.textContent = "Hide";
+      } else {
+        passwordField.type = "password";
+        toggleBtn.textContent = "Show";
+      }
+    }
 </script>
       
 </body>
