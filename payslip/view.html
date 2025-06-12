@@ -173,7 +173,7 @@
         </div>
     
     <div class="header">
-        <h1>Good Morning !!!</h1>
+         <h1 id="greeting">Good Morning <span id="username"></span>!</h1>
     
    <div class="search">
         <input type="search"id="search"placeholder="search">
@@ -296,7 +296,11 @@
 
 
           </div>
-
+<script>
+ 
+  const storedUser = localStorage.getItem('username') || 'User';
+    document.getElementById('username').textContent = storedUser;
+</script>
 
 </body>
 </html>
