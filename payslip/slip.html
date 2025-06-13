@@ -4,8 +4,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payslip Details</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
+      button{
+      
+          background-color:#62c91d;
+          cursor: pointer;
+
+         }
+         button:hover{
+            color:blue;
+
+         }
             .container1 {
       display: flex;
       background-color: white;
@@ -84,6 +98,7 @@
         </tr>
       </tbody>
     </table>
+<button onclick="downloadPDF()">Download Payslip</button>
 
     
   </div>
@@ -105,6 +120,22 @@
      document.getElementById("t-total").textContent = localStorage.getItem("total");
 
     document.getElementById("earnings").textContent=localStorage.getItem("total")
+     async function downloadPDF() {
+    const { jsPDF } = window.jspdf;
+
+    const element = document.querySelector(".payslip-box");
+
+
+    const canvas = await html2canvas(element, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
+    
+    
+    const pdf = new jsPDF();
+    const width = pdf.internal.pageSize.getWidth();
+    const height = (canvas.height * width) / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 0, 0, width, height);
+    pdf.save("Payslip.pdf");
 
   </script>
 </body>
