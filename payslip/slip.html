@@ -98,6 +98,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
 <button onclick="downloadPDF()">Download Payslip</button>
 
     
@@ -119,7 +120,8 @@
     document.getElementById("t-ded").textContent = localStorage.getItem("ded");
      document.getElementById("t-total").textContent = localStorage.getItem("total");
 
-    document.getElementById("earnings").textContent=localStorage.getItem("total")
+    document.getElementById("earnings").textContent=localStorage.getItem("total");
+     
      async function downloadPDF() {
     const { jsPDF } = window.jspdf;
 
